@@ -293,38 +293,17 @@ const UserConfig = ({ config, role, refreshConfig }: UserConfigProps) => {
           注册设置
         </h4>
         <div className='flex items-center justify-between'>
-          <label
-            className={`text-gray-700 dark:text-gray-300 ${
-              isD1Storage || isUpstashStorage ? 'opacity-50' : ''
-            }`}
-          >
+          <label className='text-gray-700 dark:text-gray-300'>
             允许新用户注册
-            {isD1Storage && (
-              <span className='ml-2 text-xs text-gray-500 dark:text-gray-400'>
-                (D1 环境下不可修改)
-              </span>
-            )}
-            {isUpstashStorage && (
-              <span className='ml-2 text-xs text-gray-500 dark:text-gray-400'>
-                (Upstash 环境下不可修改)
-              </span>
-            )}
           </label>
           <button
             onClick={() =>
-              !isD1Storage &&
-              !isUpstashStorage &&
               toggleAllowRegister(!userSettings.enableRegistration)
             }
-            disabled={isD1Storage || isUpstashStorage}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 ${
               userSettings.enableRegistration
                 ? 'bg-green-600'
                 : 'bg-gray-200 dark:bg-gray-700'
-            } ${
-              isD1Storage || isUpstashStorage
-                ? 'opacity-50 cursor-not-allowed'
-                : ''
             }`}
           >
             <span
@@ -1018,76 +997,34 @@ const SiteConfigComponent = ({ config }: { config: AdminConfig | null }) => {
     <div className='space-y-6'>
       {/* 站点名称 */}
       <div>
-        <label
-          className={`block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ${
-            isD1Storage || isUpstashStorage ? 'opacity-50' : ''
-          }`}
-        >
+        <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
           站点名称
-          {isD1Storage && (
-            <span className='ml-2 text-xs text-gray-500 dark:text-gray-400'>
-              (D1 环境下不可修改)
-            </span>
-          )}
-          {isUpstashStorage && (
-            <span className='ml-2 text-xs text-gray-500 dark:text-gray-400'>
-              (Upstash 环境下不可修改)
-            </span>
-          )}
         </label>
         <input
           type='text'
           value={siteSettings.SiteName}
           onChange={(e) =>
-            !isD1Storage &&
-            !isUpstashStorage &&
             setSiteSettings((prev) => ({ ...prev, SiteName: e.target.value }))
           }
-          disabled={isD1Storage || isUpstashStorage}
-          className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-            isD1Storage || isUpstashStorage
-              ? 'opacity-50 cursor-not-allowed'
-              : ''
-          }`}
+          className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent'
         />
       </div>
 
       {/* 站点公告 */}
       <div>
-        <label
-          className={`block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 ${
-            isD1Storage || isUpstashStorage ? 'opacity-50' : ''
-          }`}
-        >
+        <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
           站点公告
-          {isD1Storage && (
-            <span className='ml-2 text-xs text-gray-500 dark:text-gray-400'>
-              (D1 环境下不可修改)
-            </span>
-          )}
-          {isUpstashStorage && (
-            <span className='ml-2 text-xs text-gray-500 dark:text-gray-400'>
-              (Upstash 环境下不可修改)
-            </span>
-          )}
         </label>
         <textarea
           value={siteSettings.Announcement}
           onChange={(e) =>
-            !isD1Storage &&
-            !isUpstashStorage &&
             setSiteSettings((prev) => ({
               ...prev,
               Announcement: e.target.value,
             }))
           }
-          disabled={isD1Storage || isUpstashStorage}
           rows={3}
-          className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-            isD1Storage || isUpstashStorage
-              ? 'opacity-50 cursor-not-allowed'
-              : ''
-          }`}
+          className='w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent'
         />
       </div>
 
@@ -1176,9 +1113,9 @@ const SiteConfigComponent = ({ config }: { config: AdminConfig | null }) => {
       <div className='flex justify-end'>
         <button
           onClick={handleSave}
-          disabled={saving || isD1Storage || isUpstashStorage}
+          disabled={saving}
           className={`px-4 py-2 ${
-            saving || isD1Storage || isUpstashStorage
+            saving
               ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-green-600 hover:bg-green-700'
           } text-white rounded-lg transition-colors`}
